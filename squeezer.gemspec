@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    ".bundle/config",
     ".document",
     "Gemfile",
     "Gemfile.lock",
@@ -254,12 +253,6 @@ Gem::Specification.new do |s|
     "lib/generators/squeezer/templates/public/stylesheets/ui-lightness/images/ui-icons_ffffff_256x240.png",
     "lib/generators/squeezer/templates/public/stylesheets/ui-lightness/jquery-ui-1.8.5.custom.css",
     "lib/squeezer.rb",
-    "pkg/squeezer-0.1.0.gem",
-    "pkg/squeezer-0.1.1.gem",
-    "pkg/squeezer-0.1.2.gem",
-    "pkg/squeezer-0.1.3.gem",
-    "pkg/squeezer-0.1.4.gem",
-    "pkg/squeezer-0.1.5.gem",
     "squeezer.gemspec",
     "test/helper.rb",
     "test/test_squeezer.rb"
