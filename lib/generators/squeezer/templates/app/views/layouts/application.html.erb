@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) || "Untitled" %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= stylesheet_link_tag "ice/squeezer" %>
+    <%= stylesheet_link_tag "ui-lightness/jquery-ui-1.8.5.custom" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <%= render :partial=>"layouts/ice" %>
+  </body>
+</html>

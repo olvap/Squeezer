@@ -1,0 +1,13 @@
+- title "Page"
+- if can? :edit, @page
+  %p
+    = link_to "Edit", edit_page_path(@page)
+    |
+    = link_to "Destroy", @page, :confirm => 'Are you sure?', :method => :delete
+    |
+    = link_to "View All", pages_path
+
+%h2
+  = @page.title
+%p
+  = raw @page.body

@@ -1,0 +1,26 @@
+- if table.comment 
+  %h3 Comentarios
+  <br> 
+  #comments
+    = render :partial =>'comments/post', :locals=>{:@post=>table.comment.posts}
+
+
+  %br
+     
+  
+  - if !table.comment.open 
+    comentario cerrados
+    -if can? :abrir, table.comment
+      = link_to 'Abrir',{:controller=>'comments',:id=> table.comment.id, :action =>'open'}  
+      %br
+      = link_to 'Quitar comentarios',{:controller=>'comments',:id=> table.comment.id, :action =>'remove'}     
+  - else 
+    -if can? :cerrar,table.comment 
+      = link_to 'Cerrar',{:controller=>'comments',:id=> table.comment.id, :action =>'close'} 
+    -if can? :new, Post 
+      = render :partial => "comments/form", :locals=>{:table=>table} 
+   
+     
+- else 
+  no hay comentarios
+  = link_to 'Habilitar comentarios', "/comments/new?type=#{table.class}&id=#{table.id}" 

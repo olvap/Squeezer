@@ -1,0 +1,6 @@
+#menu
+  =link_to 'Administracion',sites_path
+
+  =link_to 'Blog',blogs_path
+  -Page.all.each do |page|
+    =link_to page.menu,page

@@ -1,0 +1,15 @@
+- form_for @blog, :html => { :multipart => true } do |f|
+  = f.error_messages
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.label :body
+    %br
+    = f.text_area(:body,:class=>'wysiwyg')
+    = wysiwug
+  %p
+    = f.file_field :image 
+  %p
+    = f.submit

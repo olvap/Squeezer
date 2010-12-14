@@ -1,0 +1,4 @@
+- title "Blog"
+
+= render :partial=>'entry',:locals=>{:blog=>@blog}
+= render :partial => "comments/index", :locals=>{:table=>@blog}  

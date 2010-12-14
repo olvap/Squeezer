@@ -1,0 +1,9 @@
+#user_nav.right 
+  - if user_signed_in?   
+    = link_to current_user.username,{:action=>"edit", :controller=>"devise/registrations"}
+    = link_to "Salir", destroy_user_session_path   
+  - else   
+    = link_to "Registrarse", new_user_registration_path 
+    or
+    = link_to "Conectarse", new_user_session_path  
+  

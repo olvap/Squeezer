@@ -1,0 +1,12 @@
+#user_nav
+  - if user_signed_in?   
+    Usuario:
+    = current_user.username
+    %br
+    No sos vos?
+    %br  
+    = link_to "Salir", destroy_user_session_path
+    = link_to "Perfil", edit_user_registration_path
+  - else
+    = link_to "Registrarte", new_user_registration_path  
+    = link_to "Conectarte", new_user_session_path

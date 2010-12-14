@@ -1,0 +1,14 @@
+<%#= @user.email%>
+
+<% form_for @user, {:url => {:id=>@user.id,:action => "s_roles" }} do |f|%>
+  <p>
+    <% for role in Role.find(:all) %>
+    <div>
+      <%= check_box_tag "user[role_ids][]",role.id, @user.roles.include?(role) %>
+      <%= role.name %>
+    </div>
+    <% end %>
+  </p>  
+
+  <p><%= f.submit "Update" %></p>
+<% end -%>

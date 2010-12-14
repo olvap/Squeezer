@@ -1,0 +1,19 @@
+- @post.each do |post|
+  .ui-widget-content{:post_id=>post.id , :data_time=>post.created_at.to_i }
+    .user.left{:style=>'width:100px; '}
+      -if post.user
+        = gravatar_url_for(post.user.email)
+      -else
+        = gravatar_url_for('aasdasasd')
+    .title
+      -if post.user
+        = link_to post.user.username, post.user
+      -else
+        %b=post.name
+      hace 
+      = time_ago_in_words(post.created_at)
+      -if can? :edit, post
+        = link_to 'Editar', edit_post_path(post)
+        = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete
+    .entry
+      = raw post.body

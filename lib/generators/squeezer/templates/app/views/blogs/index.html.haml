@@ -1,0 +1,8 @@
+- title "Blogs"
+  
+-if can? :new, Blog
+  = link_to "New Blog", new_blog_path
+- for blog in @blogs
+  =render :partial=>'entry',:locals=>{:blog=>blog}
+
+

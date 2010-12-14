@@ -1,0 +1,15 @@
+%h3 Últimas noticias
+=link_to 'Ver todo',blogs_path
+-latests.each do |blog|
+  %div{:class=>'post'}
+    %h4 
+      =blog.title
+    %div{:class=>'meta'}
+      = blog.user.username
+      by
+      = blog.created_at
+    %p
+      =blog.body[0,50]
+    %p
+      =link_to 'leer mas', blog
+  

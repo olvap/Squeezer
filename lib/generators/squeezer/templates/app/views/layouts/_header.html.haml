@@ -1,0 +1,10 @@
+%table
+  %th
+    %td
+      %div
+        = image_tag site.logo.url
+    %td
+      %h1 
+        = link_to_unless_current site.name, root_url+site.home
+      %h3
+        = site.slogan

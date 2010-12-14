@@ -1,0 +1,165 @@
+- content_for(:head) do
+  %script{:type=>"text/javascript", :src=>"javascripts/prototype.js"}
+  %script{:type=>"text/javascript", :src=>"javascripts/effects.js"}
+  
+  %script{:type=>"text/javascript"}
+    function about() {
+    if (Element.empty('about-content')) {
+    new Ajax.Updater('about-content', 'rails/info/properties', {
+    method:     'get',
+    onFailure:  function() {Element.classNames('about-content').add('failure')},
+    onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
+    });
+    } else {
+    new Effect[Element.visible('about-content') ? 
+    'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
+    }
+    }
+     
+    window.onload = function() {
+    $('search-text').value = '';
+    $('search').onsubmit = function() {
+    $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
+    }
+    }
+- content_for(:sidebar) do
+  %ul{:id=>'sidebar-items'}
+    %li
+      %form{:id=>"searchx",:action=>"http://www.google.com/search",:method=>"get"}
+        %input{:name=>"hl",:value=>"en",:type=>"hidden"}
+        %input{:id=>"search-text",:name=>"q",:value=>" ",:type=>"text"}
+        %input{:value=>"Search",:type=>"submit"}
+      the Rails site
+    %li
+      %h3 Join the community
+      %ul{:class=>"links"}
+        %li
+          %a{:href=>"http://www.rubyonrails.org/"} Ruby on Rails
+        %li  
+          %a{:href=>"http://weblog.rubyonrails.org/"} Official weblog
+        %li  
+          %a{:href=>"http://wiki.rubyonrails.org/"} Wiki
+      %li
+        %h3 Browse the documentation
+        %ul{:class=>"links"}
+          %li
+            %a{:href=>"http://stdlib.rubyonrails.org/"} Rails API
+          %li
+            %a{:href=>"http://corelib.rubyonrails.org/"} Ruby core
+          %li
+            %a{:href=>"http://guides.rubyonrails.org/"} Rails Guides
+
+- content_for(:header) do
+  %h1 Squeezer!
+  %h3 A nadie le gusta exprimir, pero a todos les gusta la limonada
+%div
+  #getting-started 
+    #about
+      %h3 
+        %a{:href => 'rails/info/properties', :onclick=> 'about(); return false'} Acerca de la aplicacion
+      #about-content{:style=>"display: none"}
+    %br
+    -if !site
+      = link_to 'Crea los datos para el sitio', new_site_path
+    -else
+      = link_to 'Modifica los datos del sitio', {:controller=>'sites',:action=>'edit',:id=>site.id}
+      %br
+      = link_to 'Crea Usuaior', new_user_registration_path
+      %br
+      = link_to 'Administra roles', roles_path
+    %br
+    %h3
+      Crea conteido para la aplicación
+    Podes crear nuevas paginas para tu sitio
+    =link_to 'Paginas', new_page_path
+    %br
+    O tambien información en el blog
+    =link_to 'Blog', new_blog_path
+    %div{:class=>'wikistyle'}
+      %h3 Modulos
+      %b Usuarios
+      %p
+        El modulo de Usuarios se crea con 
+        =link_to 'Devise.','http://github.com/plataformatec/devise'
+
+      %b Permisos
+      %p
+        Los permisos los maneja la gema 
+        =link_to 'Cancan,','http://github.com/ryanb/cancan'      
+        para modificarlos hay que cambiar la clase ability. La clase se encuentra con los modelos
+        %br
+      
+      %b Comentarios
+      %p
+        Los comentarios son modelos dentro de la app.
+        %br
+        Para agregar comentarios a una Entidad, en el modelo de pagina se agrega
+      %pre
+        has_one :comment, :as=>:commentable,:dependent => :destroy
+      %p
+        Y en el show de pagina
+      %pre
+        <%= render :partial => "comments/index", :locals=>{:table=>@pagina}%>
+      %b Estilos
+      %p
+        Los estilos se instalan en la carpeta
+        %pre
+          public/stylesheets/ice
+        Una vez instalados se pueden cambiar en
+        %pre
+          =link_to 'Editar sitio',{:controller=>'sites',:action=>'edit',:id=>1} 
+      %h3 Gemas
+    
+      %b Devise
+      %p
+        =link_to 'github','http://github.com/plataformatec/devise'
+        %br    
+        %b Rails casts
+        %br
+        =link_to 'Railscasts 209','http://railscasts.com/episodes/209-introducing-devise'
+        %br
+        =link_to 'Railscasts 210','http://railscasts.com/episodes/210-customizing-devise'
+        %br
+        %b ASCIIcasts
+        %br
+        =link_to 'ASCIIcasts 209','http://asciicasts.com/episodes/209-introducing-devise'
+        %br
+        =link_to 'ASCIIcasts 210','http://asciicasts.com/episodes/210-customizing-devise'    
+
+      %b Cancan
+      %p
+        =link_to 'github','http://github.com/ryanb/cancan'
+        %br    
+        %b Rails casts
+        %br
+        =link_to 'Railscasts 192','http://railscasts.com/episodes/192-authorization-with-cancan'
+        %br
+        %b ASCIIcasts
+        %br
+        =link_to 'ASCIIcasts 192','http://asciicasts.com/episodes/192-authorization-with-cancan'    
+      %b haml
+      %p
+        =link_to 'Home','http://haml-lang.com/'
+      
+      %b nifty-generators
+      %p
+        =link_to 'Git','http://github.com/ryanb/nifty-generators'
+        %br
+        Ejemplo
+        %pre
+          $ rails g scaffold blog title:string
+        %p 
+          Las vista se generan en haml, porque el aplication.rb fué cambiado y se le agregò esto.
+        %pre
+          config.generators do |g|
+          %br  
+          g.haml true
+          %br
+          end
+        %p
+          De lo contrario hay que agregar --haml a cada sentencia.
+      
+            
+      %b paperclip
+      %p
+        =link_to 'Git','http://github.com/thoughtbot/paperclip'

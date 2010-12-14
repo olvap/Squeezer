@@ -1,0 +1,16 @@
+- form_for @topic do |f|
+  = f.error_messages 
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title 
+    %br
+    = f.hidden_field :forum_id 
+  
+  -if action_name =='new' 
+    - fields_for @post do |p| 
+      = p.text_area :body 
+  
+  %p
+    = f.submit "Submit" 
+

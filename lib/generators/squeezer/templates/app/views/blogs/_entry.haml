@@ -1,0 +1,26 @@
+.post
+  .ui-widget-content
+    .ui-widget-header
+      =link_to_unless_current blog.title, blog
+    %p.meta
+      =blog.created_at
+      by
+      = blog.user.username
+      = link_to 'Show', blog
+      -if can? :edit, blog
+        = link_to 'Edit', edit_blog_path(blog)
+        = link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete  
+      
+    .entry
+      %p
+        -if action_name=='index'
+          =blog.body[0,200]
+        -else
+          =raw blog.body
+      %p
+        -if blog.comment && blog.comment.posts.size>0
+          Comentarios(
+          =blog.comment.posts.size
+          )
+      %p   
+        =link_to 'Leer mas, comentar', blog

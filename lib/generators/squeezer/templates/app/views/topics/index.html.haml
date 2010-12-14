@@ -1,0 +1,23 @@
+- title "Temas" 
+= javascript_include_tag 'pagination'
+= will_paginate @topics
+%table
+  %tr
+    %th Tema
+ 
+    - for topic in @topics 
+      %tr
+        %td
+          %h3
+            =h topic.title
+          por
+          = link_to topic.comment.firts.post.user.username, topic.comment.firts.post.user
+        
+        %td
+          = link_to "Show", topic
+        %td
+          = link_to "Edit", edit_topic_path(topic)
+        %td
+          = link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete 
+%p
+  = link_permitted(new_topic_path,"Nuevo Tema")

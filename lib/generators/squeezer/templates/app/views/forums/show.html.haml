@@ -1,0 +1,43 @@
+%h3
+  =h @forum.name 
+=h @forum.desc 
+%br
+= link_to "Foro", forums_path 
+%br
+= link_permitted "Tema Nuevo",:edit,@forum,{:action=>'new', :controller=>'topics',:id=>@forum.id}
+= javascript_include_tag 'pagination'
+%br
+= will_paginate @topics
+%br
+
+%br
+- if @topics.size>0
+  %table{:class=>'wide mytable'}
+    %tr
+      %th
+        Titulo
+      %th
+        Ultimo Post
+      %th
+        Respuestas
+    - for topic in @topics
+      %tr
+        %td
+          %strong
+            = link_to topic.title, topic
+          = link_permitted "Editar",:edit,topic,edit_forum_path(topic)  
+          = link_permitted "Editar",:destroy,topic,topic
+        
+
+        %td{:class=>'greycolumn'}
+          -if topic.comment.posts.last
+            = time_ago_in_words(topic.comment.posts.last.created_at)
+            por
+            = link_to topic.comment.posts.last.user.username, topic.comment.posts.last.user
+          -else
+            sin comentarios
+        %td
+          = topic.comment.posts.count - 1
+%p
+  = link_permitted "Editar",:edit,@forum,{:action=>'edit', :controller=>'forums'}
+  = link_permitted("Borrar",:destroy,@forum,@forum)

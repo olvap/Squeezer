@@ -1,0 +1,22 @@
+- title "Pages"
+
+%table
+  %tr
+    %th Title
+    %th Menu
+    %th Body
+    %th User
+  - for page in @pages
+    %tr
+      %td= page.title
+      %td= page.menu
+      %td= page.body[0,200]
+      %td= page.user_id
+      %td= link_to 'Show', page
+      -if can? :edit, page
+        %td= link_to 'Edit', edit_page_path(page)
+        %td= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
+
+%p
+  -if can? :new, Page
+    = link_to "New Page", new_page_path

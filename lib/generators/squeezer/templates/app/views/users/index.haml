@@ -1,0 +1,5 @@
+- for user in @users
+  %p
+    =user.username
+    -if can? :roles, user
+      =link_to "Permisos", {:action=>:roles,:id=>user.id}

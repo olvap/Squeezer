@@ -1,0 +1,16 @@
+- title 'Tema'
+= @topic.title 
+%br
+= link_to 'Foro', forums_path 
+|
+= link_to @topic.forum.name, @topic.forum 
+= link_permitted "Editar",:edit,@topic,edit_topic_path(@topic)
+= link_permitted "Borrar",:destroy,@topic,@topic 
+
+%br
+
+=render :partial =>'comments/list',:locals=>{:table=>@posts}
+=render :partial =>'comments/add',:locals=>{:table=>@topic}
+
+
+%br

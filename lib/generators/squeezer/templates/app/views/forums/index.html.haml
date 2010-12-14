@@ -1,0 +1,37 @@
+- title "Foros Squeezer"
+ 
+= link_permitted "Nuevo Foro",:new,:forums,new_forum_path
+
+%table{:class=>'wide mytable'}
+  %tr
+    %th
+      Foro
+    %th
+      Ultimo
+    %th
+      Temas
+    - for forum in @forums
+      %tr
+        %td
+          %strong
+            =link_to forum.name, forum
+          = link_permitted "Editar",:edit,forum,edit_forum_path(forum)  
+          = link_permitted "Borrar",:destroy,forum,forum
+          
+          %br 
+          =h forum.desc
+        %td{:class=>'greycolumn'}
+          -if forum.topics.last
+            -if forum.topics.last.comment.posts.last
+              =h time_ago_in_words(forum.topics.last.comment.posts.last.created_at)
+              por
+              = link_to forum.topics.last.comment.posts.last.user.username, forum.topics.last.comment.posts.last.user
+            -else
+              sin comentarios            
+          -else
+            sin comentarios
+          
+        %td
+          = forum.topics.count
+ 
+

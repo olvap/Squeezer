@@ -1,0 +1,7 @@
+- form_for @post do |f|
+  = f.error_messages
+  %p
+    = f.text_area(:body,:class=>'wysiwyg')
+    = wysiwug
+  %p
+    = f.submit

@@ -1,0 +1,42 @@
+%div
+  %h2 Informacion del sitio
+  
+  - form_for (@site), :html => { :multipart => true } do |f| 
+    = f.error_messages 
+
+    %p
+      = f.label :'Nombre*'
+    %p
+      = f.text_field :name 
+    %p
+      = f.label :slogan 
+    %p
+      = f.text_field :slogan 
+    %p
+      = f.label :email 
+    %p
+      = f.text_field :email 
+    %p
+      = f.label :Logo 
+    %p
+      = f.file_field :logo 
+    %p 
+      = f.label :Icono 
+    %p
+      = f.file_field :icon 
+    %p
+      = f.label :Mision 
+    %p
+      = f.text_area :mision, :rows => 5 
+    %p
+      = f.label :Footer 
+    %p
+      = f.text_area :footer, :rows => 5
+
+    %p
+      = f.label :'Estilo' 
+    %p
+      = f.select :style, @files
+
+    %p
+      = f.submit 'Update' 

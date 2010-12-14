@@ -1,0 +1,6 @@
+- if can? :edit, @post
+  - form_for @post do |p|
+    = p.text_area(:body,:class=>'wysiwyg')
+    = wysiwug
+    %br
+    = p.submit

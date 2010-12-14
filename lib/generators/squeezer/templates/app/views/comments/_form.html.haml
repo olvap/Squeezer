@@ -1,0 +1,19 @@
+- if can? :new, Post
+  - form_for Post.new do |p|
+    - if Post.new.errors.any? 
+      #error_explanation
+        %h2=pluralize(@post.errors.count, "error") 
+        prohibited this post from being saved:
+        %ul
+          - @post.errors.full_messages.each do |msg|
+            %li=msg 
+    = p.hidden_field :comment_id,:value=>table.comment.id 
+    -if !current_user
+      Nombre
+      %br
+      =p.text_field :name
+      %br
+    = p.text_area(:body,:class=>'wysiwyg')
+    = wysiwug
+    %br
+    = p.submit

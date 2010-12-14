@@ -1,0 +1,14 @@
+- @post.each do |post|
+  #post.post{:post_id=>post.id , :data_time=>post.created_at.to_i }
+    %div.user
+      -if post.user
+        = post.user.username
+      -else
+        =post.name
+    = post.created_at
+    - if can? :update, post 
+      = link_to 'Editar', edit_post_path(post)
+    - if can? :destroy, post
+      = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete
+    %div.entry
+      = post.body
