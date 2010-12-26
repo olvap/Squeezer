@@ -36,8 +36,6 @@ class SqueezerGenerator < Rails::Generators::Base
     puts "para usar mysql"
     gem "meta_search"
     puts "hace las busquedas mas faciles"
-    gem "rails_helpers_fix"
-    puts "hasta que salga laversion 3.1 esto soluciona el error de no inclir los helpers"
     
     generate('bundler install')
     generate('jquery:install --ui')
