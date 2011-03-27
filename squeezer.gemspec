@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{squeezer}
-  s.version = "0.1.11"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oldani Pablo"]
-  s.date = %q{2011-02-07}
+  s.date = %q{2011-03-26}
   s.description = %q{an appliaction ready to run}
   s.email = %q{magicche@hotmail.com}
   s.extra_rdoc_files = [
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
     "app/models/blog.rb",
     "app/models/comment.rb",
     "app/models/page.rb",
+    "app/models/permition.rb",
     "app/models/post.rb",
     "app/models/role.rb",
     "app/models/site.rb",
@@ -201,9 +202,9 @@ Gem::Specification.new do |s|
     "lib/generators/squeezer/templates/db/migrate/create_blogs.rb",
     "lib/generators/squeezer/templates/db/migrate/create_comments.rb",
     "lib/generators/squeezer/templates/db/migrate/create_pages.rb",
+    "lib/generators/squeezer/templates/db/migrate/create_permitions.rb",
     "lib/generators/squeezer/templates/db/migrate/create_posts.rb",
     "lib/generators/squeezer/templates/db/migrate/create_roles.rb",
-    "lib/generators/squeezer/templates/db/migrate/create_roles_users.rb",
     "lib/generators/squeezer/templates/db/migrate/create_sites.rb",
     "lib/generators/squeezer/templates/db/migrate/data.rb",
     "lib/generators/squeezer/templates/db/migrate/page_data.rb",
