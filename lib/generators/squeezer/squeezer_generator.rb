@@ -4,7 +4,7 @@ require 'active_support/core_ext/object/blank'
 
 class SqueezerGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
-   
+
   source_root File.expand_path('../templates', __FILE__)
 
   def self.next_migration_number(dirname)
@@ -14,9 +14,9 @@ class SqueezerGenerator < Rails::Generators::Base
       "%.3d" % (current_migration_number(dirname) + 1 )
     end
   end
-      
+
   def squeez
-    gem "will_paginate", "~> 3.0.pre2"  
+    gem "will_paginate", "~> 3.0.pre2"
     puts "paginacion"
     gem 'haml'
     puts "para escribir en haml en lugar de html"
@@ -36,7 +36,7 @@ class SqueezerGenerator < Rails::Generators::Base
     puts "para usar mysql"
     gem "meta_search"
     puts "hace las busquedas mas faciles"
-    
+
     generate('bundler install')
     generate('jquery:install --ui')
     generate('devise:install')
@@ -59,54 +59,55 @@ class SqueezerGenerator < Rails::Generators::Base
     cf_v "layouts/_ice.haml"
     copy_file("public/javascripts/application.js","public/javascripts/application.js")
     copy_file("public/javascripts/jquery.layout.min-1.2.0.js","public/javascripts/jquery.layout.min-1.2.0.js")
-    
-    copy_file("config/devise.rb","config/initializers/devise.rb")          
-    
-    FileUtils.cp_r(File.expand_path('../templates/public/stylesheets', __FILE__),'public/')     
-    
+
+    copy_file("config/devise.rb","config/initializers/devise.rb")
+
+    FileUtils.cp_r(File.expand_path('../templates/public/stylesheets', __FILE__),'public/')
+
     migrations
-    
+
   end
-  
+
   private
 
   def migrations
-    #migraciones    
+    #migraciones
     cf_mig("create_roles")
     cf_mig("create_pages")
     cf_mig("create_blogs")
     cf_mig("create_comments")
     cf_mig("create_posts")
-    cf_mig("create_roles_users")
+    cf_mig("create_permitions")
     cf_mig("create_sites")
     cf_mig("add_username_user")
     cf_mig("squeez_data")
-    cf_mig("page_data")    
+    cf_mig("page_data")
   end
-  
-  def cf_mig(dir)  
+
+  def cf_mig(dir)
     migration_template "db/migrate/#{dir}.rb", "db/migrate/#{dir}"
     sleep 1
   end
-  
+
   def cf_js(dir)
     copy_file("public/javascripts/#{dir}","public/javascripts/#{dir}")
   end
-  
+
   def cf_h(dir)
     copy_file("app/helpers/#{dir}","app/helpers/#{dir}")
   end
-   
+
   def cf_v(dir)
     copy_file("app/views/#{dir}","app/views/#{dir}")
   end
-  
+
   def cf_m(dir)
     copy_file("app/models/#{dir}","app/models/#{dir}")
   end
-  
+
   def cf_c(dir)
     copy_file("app/controllers/#{dir}","app/controllers/#{dir}")
   end
-  
+
 end
+
